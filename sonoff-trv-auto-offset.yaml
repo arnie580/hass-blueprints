@@ -1,0 +1,47 @@
+blueprint:
+  name: Sonoff TRV Offset
+  description: Automatically adjust the offset of the temperature sensor using an external sensor.
+  domain: automation
+  input:
+    climate_entity:
+      name: Sonoff TRV Entity
+      selector:
+        entity:
+          filter:
+            - domain: climate
+    sensor_entity:
+      name: External Temp Sensor
+      selector:
+        entity:
+          filter:
+            - domain: sensor
+            - device_class: temperature
+  
+mode: single
+max_exceeded: silent
+  
+variables:
+  trv_entity: !input 'climate_entity'
+  temp_entity: !input 'sensor_entity'
+  sensor_temp: "{{ states(temp_entity) | round(1) }}"
+  trv_temp: "{{ state_attr(trv_entity, 'local_temperature') | round(1) }}"
+  trv_offset: "{{ state_attr(trv_entity, 'local_temperature_calibration') | round(1) }}"
+  friendly_name: "{{ state_attr(trv_entity, 'friendly_name')}}"
+
+trigger:
+  - platform: state
+    entity_id: !input 'climate_entity'
+    attribute: local_temperature
+    for:
+      seconds: 15
+  - platform: state
+    entity_id: !input 'sensor_entity'
+    for:
+      seconds: 15
+
+action:
+  - service: mqtt.publish
+    data_template:
+      topic_template: "zigbee2mqtt/{{ friendly_name }}/test"
+      payload_template: '{"local_temperature_calibration":{{ sensor_temp }}}'
+  - delay: "00:00:05"
