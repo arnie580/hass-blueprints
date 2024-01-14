@@ -27,7 +27,7 @@ variables:
   trv_temp: "{{ state_attr(trv_entity, 'local_temperature') | round(1) }}"
   trv_offset: "{{ state_attr(trv_entity, 'local_temperature_calibration') | round(1) }}"
   friendly_name: "{{ state_attr(trv_entity, 'friendly_name')}}"
-
+  new_offset: "{{ (sensor_temp - (trv_temp - trv_offset)) | round(1) }}}"
 trigger:
   - platform: state
     entity_id: !input 'climate_entity'
@@ -43,5 +43,5 @@ action:
   - service: mqtt.publish
     data_template:
       topic_template: "zigbee2mqtt/{{ friendly_name }}/set"
-      payload_template: '{"local_temperature_calibration":{{ (sensor_temp - (trv_temp - trv_offset)) | round(1) }}}'
+      payload_template: '{"local_temperature_calibration":{{ new_offset }}}'
   - delay: "00:00:05"
