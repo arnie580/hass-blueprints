@@ -29,11 +29,11 @@ variables:
   friendly_name: "{{ state_attr(trv_entity, 'friendly_name')}}"
   
 trigger:
-  - platform: state
-    entity_id: !input 'climate_entity'
-    attribute: local_temperature
-    for:
-      seconds: 15
+ # - platform: state
+ #   entity_id: !input 'climate_entity'
+ #   attribute: local_temperature
+ #   for:
+ #     seconds: 15
   - platform: state
     entity_id: !input 'sensor_entity'
     for:
@@ -49,4 +49,4 @@ action:
     data_template:
       topic_template: "zigbee2mqtt/{{ friendly_name }}/set"
       payload_template: '{"local_temperature_calibration":{{ (sensor_temp - (trv_temp - trv_offset)) | round(1) }}}'
-  - delay: 300
+  - delay: 5
