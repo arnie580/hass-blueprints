@@ -49,4 +49,4 @@ action:
     data_template:
       topic_template: "zigbee2mqtt/{{ friendly_name }}/set"
       payload_template: '{"local_temperature_calibration":{{ (sensor_temp - (trv_temp - trv_offset)) | round(1) }}}'
-  - delay: 5
+  - delay: 300
