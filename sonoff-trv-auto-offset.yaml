@@ -41,7 +41,7 @@ trigger:
 
 condition:
   conditions:
-    condition: template:
+    condition: template
       value_template: "{{ sensor_temp != trv_temp }}"
 
 action:
