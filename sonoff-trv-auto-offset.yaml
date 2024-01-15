@@ -40,9 +40,8 @@ trigger:
       seconds: 15
 
 condition:
-  conditions:
-    condition: template
-    value_template: "{{ sensor_temp != trv_temp }}"
+  condition: template
+  value_template: "{{ sensor_temp != trv_temp }}"
 
 action:
   - service: mqtt.publish
