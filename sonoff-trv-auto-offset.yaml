@@ -34,8 +34,8 @@ trigger:
     for:
       seconds: 15
 
-  - platform: time_pattern
-    minutes: "/5"
+#  - platform: time_pattern
+ #   minutes: "/5"
 
 condition:
   condition: template
