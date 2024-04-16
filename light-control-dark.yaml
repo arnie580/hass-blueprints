@@ -1,0 +1,49 @@
+blueprint:
+  name: Light Control Dark
+  description: Turn on a light for 5 minutes when a binary sensor is triggered, but only if the sun is below the horizon.
+  domain: automation
+  input:
+    light_entity:
+      name: Light
+      description: The light to control.
+      selector:
+        entity:
+          domain: light
+    sensor_entity:
+      name: Binary Sensor
+      description: The binary sensor that triggers the light.
+      selector:
+        entity:
+          domain: binary_sensor
+    minutes_on:
+      name: Duration in Minutes
+      description: Number of minutes the light should stay on.
+      default: 5
+      selector:
+        number:
+          min: 1
+          max: 1440
+          unit_of_measurement: minutes
+
+trigger:
+  - platform: state
+    entity_id: !input sensor_entity
+    from: 'off'
+    to: 'on'
+
+condition:
+  - condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+
+action:
+  - service: light.turn_on
+    target:
+      entity_id: !input light_entity
+  - delay:
+      minutes: !input minutes_on
+  - service: light.turn_off
+    target:
+      entity_id: !input light_entity
+
+mode: restart
