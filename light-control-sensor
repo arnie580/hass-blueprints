@@ -9,12 +9,20 @@ blueprint:
       selector:
         entity:
           domain: light
-    sensor_entity:
+    activation_entity:
       name: Binary Sensor
       description: The binary sensor that triggers the light.
       selector:
         entity:
           domain: binary_sensor
+
+    brightness_entity:
+      name: Light Sensor
+      description: The sensor measuring the areas brightness. 
+      selector:
+        entity:
+          domain: sensor
+
     minutes_on:
       name: Duration in Minutes
       description: Number of minutes the light should stay on.
@@ -25,9 +33,18 @@ blueprint:
           max: 1440
           unit_of_measurement: minutes
 
+    brightness_threshold:
+      name: Brightness Threshold
+      description: When the brightness level is below this value the light should turn on. 
+      default: 60
+      selector:
+        number:
+          min: 0
+          max: 100
+          unit_of_measurement: %
 trigger:
   - platform: state
-    entity_id: !input sensor_entity
+    entity_id: !input activation_entity
     from: 'off'
     to: 'on'
 
@@ -42,7 +59,7 @@ action:
       entity_id: !input light_entity
   - wait_for_trigger:
       - platform: state
-        entity_id: !input sensor_entity
+        entity_id: !input activation_entity
         to: 'off'
   - delay:
       minutes: !input minutes_on
