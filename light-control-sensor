@@ -2,6 +2,7 @@ blueprint:
   name: Light Control Sensor
   description: Turn on a light for 5 minutes when a binary sensor is triggered, but only if the sun is below the horizon.
   domain: automation
+  
   input:
     light_entity:
       name: Light
@@ -42,6 +43,9 @@ blueprint:
           min: 0
           max: 100
        #   unit_of_measurement: '%'
+variables:
+  current_brightness: !input brightness_entity
+  brightness_target: !input brightness_threshold
 trigger:
   - platform: state
     entity_id: !input activation_entity
@@ -50,7 +54,7 @@ trigger:
 
 condition:
   - condition: template
-    value_template: "{{ !input brightness_entity|float < !input brightness_threshold|float}}"
+    value_template: "{{ current_brightness|float < brightness_target|float}}"
 
 action:
   - service: light.turn_on
