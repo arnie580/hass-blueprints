@@ -49,9 +49,8 @@ trigger:
     to: 'on'
 
 condition:
-  - condition: state
-    entity_id: sun.sun
-    state: 'below_horizon'
+  - condition: template
+    template: "{{ !input brightness_entity|float < !input brightness_threshold|float"}}
 
 action:
   - service: light.turn_on
