@@ -50,7 +50,7 @@ trigger:
 
 condition:
   - condition: template
-    template: "{{ !input brightness_entity|float < !input brightness_threshold|float"}}
+    template: "{{ !input brightness_entity|float < !input brightness_threshold|float}}"
 
 action:
   - service: light.turn_on
