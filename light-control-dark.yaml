@@ -37,22 +37,22 @@ trigger:
 
 action:
   - choose:
-      conditions:
-        - condition: state
-          entity_id: !input sensor_entity
-          state: 'on'
-     #   - condition: state
-     #     entity_id: sun.sun
-      #    state: 'below_horizon'
-      sequence:
-        - service: light.turn_on
-          data:
-            entity_id: !input light_entity
-      conditions:
-        - condition: state
-          entity_id: !input sensor_entity
-          state: 'off'
-      sequence:
-        - service: light.turn_off
-          data:
-            entity_id: !input light_entity
+      - conditions:
+          - condition: state
+            entity_id: !input sensor_entity
+            state: 'on'
+          - condition: state
+            entity_id: sun.sun
+            state: 'below_horizon'
+        sequence:
+          - service: light.turn_on
+            data:
+              entity_id: !input light_entity
+      - conditions:
+          - condition: state
+            entity_id: !input sensor_entity
+            state: 'off'
+        sequence:
+          - service: light.turn_off
+            data:
+              entity_id: !input light_entity
