@@ -40,7 +40,7 @@ action:
       conditions:
         - condition: state
           entity_id: !input sensor_entity
-          state: 'on"
+          state: 'on'
         - condition: state
           entity_id: sun.sun
           state: 'below_horizon'
