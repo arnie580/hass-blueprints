@@ -43,15 +43,17 @@ blueprint:
           min: 0
           max: 100
        #   unit_of_measurement: '%'
-variables:
-  current_brightness: !input brightness_entity
-  brightness_target: !input brightness_threshold
+#variables:
+  #current_brightness: !input brightness_entity
+ # brightness_target: !input brightness_threshold
 trigger:
   - platform: state
     entity_id: !input activation_entity
     from: 'off'
     to: 'on'
-
+variables:
+  current_brightness: !input brightness_entity
+  brightness_target: !input brightness_threshold
 condition:
   - condition: template
     value_template: "{{ states(current_brightness)|float < states(brightness_target)|float}}"
