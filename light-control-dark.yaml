@@ -28,8 +28,12 @@ blueprint:
 trigger:
   - platform: state
     entity_id: !input sensor_entity
-    from: 'off'
     to: 'on'
+  - platform: state
+    entity_id: !input sensor_entity
+    to: 'off'
+    for:
+      minutes: !input minutes_on
 
 condition:
   - condition: state
