@@ -59,7 +59,7 @@ condition:
     value_template: "{{ states[current_brightness].state|float < states(brightness_target)|float}}"
 
 action:
-  - service: notification.pushbullet_chris
+  - service: notify.pushbullet_chris
     data:
       title: Test
       message: "{{ states[current_brightness].state }}"
