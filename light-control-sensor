@@ -56,7 +56,7 @@ variables:
   brightness_target: !input brightness_threshold
 condition:
   - condition: template
-    value_template: "{{ current_brightness | float < brightness_target | float }}"
+    value_template: "{{ states[current_brightness].state | float < brightness_target | float }}"
 
 action:
   - service: light.turn_on
