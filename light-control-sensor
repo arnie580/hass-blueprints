@@ -51,12 +51,13 @@ trigger:
     entity_id: !input activation_entity
     from: 'off'
     to: 'on'
-variables:
-  current_brightness: !input brightness_entity
-  brightness_target: !input brightness_threshold
+#variables:
+#  current_brightness: !input brightness_entity
+#  brightness_target: !input brightness_threshold
 condition:
-  - condition: template
-    value_template: "{{ states[current_brightness].state | float < brightness_target | float }}"
+  - condition: numeric_state
+    entity: !input brightness_entity
+    below: !input brightness_threshold
 
 action:
   - service: light.turn_on
