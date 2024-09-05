@@ -46,10 +46,10 @@ blueprint:
 trigger:
   - platform: state
     entity_id: !input activation_entity
-    to: 'on'
+    state: 'on'
   - platform: state
     entity_id: !input activation_entity
-    to: 'off'
+    state: 'off'
     for:
       minutes: !input minutes_on
 
@@ -58,7 +58,7 @@ action:
       - conditions:
           - condition: state
             entity_id: !input activation_entity
-            to: "on"
+            state: "on"
           - condition: numeric_state
             entity_id: !input brightness_entity
             below: !input brightness_threshold
@@ -70,7 +70,7 @@ action:
       - conditions:
           - condition: state
             entity_id: !input activation_entity
-            to: "off"
+            state: "off"
         sequence:
           - service: light.turn_on
             data:
