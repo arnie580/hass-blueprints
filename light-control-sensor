@@ -56,7 +56,7 @@ trigger:
 #  brightness_target: !input brightness_threshold
 condition:
   - condition: numeric_state
-    entity: !input brightness_entity
+    entity_id: !input brightness_entity
     below: !input brightness_threshold
 
 action:
