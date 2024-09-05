@@ -72,6 +72,6 @@ action:
             entity_id: !input activation_entity
             state: "off"
         sequence:
-          - service: light.turn_on
+          - service: light.turn_off
             data:
               entity_id: !input light_entity
