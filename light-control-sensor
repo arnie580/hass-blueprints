@@ -46,10 +46,10 @@ blueprint:
 trigger:
   - platform: state
     entity_id: !input activation_entity
-    state: 'on'
+    to: 'on'
   - platform: state
     entity_id: !input activation_entity
-    state: 'off'
+    to: 'off'
     for:
       minutes: !input minutes_on
 
