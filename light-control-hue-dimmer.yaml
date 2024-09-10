@@ -30,14 +30,10 @@ trigger:
   entity_id: !input hue_remote
 
 action:
-  - action: notify.mobile_app_chris_phone
-    data:
-      title: Test
-      message: "{{ trigger.to_state.state }}"
   - choose:
       - conditions:
           - condition: template
-            value_template: '{{ trigger.to_state == "on_press" }}'
+            value_template: '{{ trigger.to_state.state == "on_press" }}'
         sequence:
           - action: light.turn_on
             data:
@@ -45,7 +41,7 @@ action:
               brightness_pct: !input default_brightness
       - conditions:
           - condition: template
-            value_template: '{{ trigger.to_state == "off_press" }}'
+            value_template: '{{ trigger.to_state.state == "off_press" }}'
         sequence:
           - action: light.turn_off
             data:
