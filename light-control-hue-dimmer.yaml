@@ -15,7 +15,7 @@ blueprint:
       selector:
         entity:
           domain: light
-    delay_time:
+    default_brightness:
       name: Default Brightness
       description: The default brightness when the light is switched on.
       default: 100
@@ -31,4 +31,18 @@ trigger:
 
 action:
   - choose:
-      - condition:
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.to_state == 'on_press' }}"
+        sequence:
+          - action: light.turn_on
+            data:
+              entity_id: !input light_entity
+              brightness_pct: !input default_brightness
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.to_state == 'off_press' }}"
+        sequence:
+          - action: light.turn_off
+            data:
+              entity_id: !input light_entity
