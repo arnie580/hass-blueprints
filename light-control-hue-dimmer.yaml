@@ -1,1 +1,47 @@
+blueprint:
+  name: Hue Dimmer Light Control
+  description: Control a light or group with a Hue dimmer.
+  domain: automation
+  input:
+    binary_sensor_entity:
+      name: Hue Remote
+      description: The binary sensor that triggers the light.
+      selector:
+        entity:
+          domain: sensor
+    light_entity:
+      name: Light
+      description: The light to control.
+      selector:
+        entity:
+          domain: light
+    delay_time:
+      name: Default Brightness
+      description: The default brightness when the light is switched on.
+      default: 100
+      selector:
+        number:
+          min: 1
+          max: 100
+          unit_of_measurement: percent
 
+trigger:
+  platform: state
+  entity_id: !input binary_sensor_entity
+  to: 'on'
+
+action:
+  - service: light.turn_on
+    target:
+      entity_id: !input light_entity
+  - wait_for_trigger:
+      - platform: state
+        entity_id: !input binary_sensor_entity
+        to: 'off'
+  - delay: 
+      minutes: !input delay_time
+  - service: light.turn_off
+    target:
+      entity_id: !input light_entity
+
+mode: restart
