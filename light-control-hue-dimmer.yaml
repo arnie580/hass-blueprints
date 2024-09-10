@@ -30,6 +30,10 @@ trigger:
   entity_id: !input hue_remote
 
 action:
+  - action: notify.mobile_app_chris_phone
+    data:
+      title: Test
+      message: "{{ trigger.to_state }}"
   - choose:
       - conditions:
           - condition: template
