@@ -39,22 +39,22 @@ action:
             data:
               entity_id: !input light_entity
               brightness_pct: !input default_brightness
-      - conditions:
-          - condition: template
-            value_template: '{{ trigger.to_state.state == "up_press" }}'
-        sequence:
-          - action: light.turn_on
-            data:
-              entity_id: !input light_entity
-              brightness_step_pct: 10
-      - conditions:
-          - condition: template
-            value_template: '{{ trigger.to_state.state == "down_press" }}'
-        sequence:
-          - action: light.turn_on
-            data:
-              entity_id: !input light_entity
-              brightness_step_pct: -10  
+  #    - conditions:
+   #       - condition: template
+  #          value_template: '{{ trigger.to_state.state == "up_press" }}'
+#        sequence:
+#          - action: light.turn_on
+#            data:
+ #             entity_id: !input light_entity
+ #             brightness_step_pct: 10
+  #    - conditions:
+   #       - condition: template
+   #         value_template: '{{ trigger.to_state.state == "down_press" }}'
+    #    sequence:
+   #       - action: light.turn_on
+  #          data:
+  #            entity_id: !input light_entity
+#              brightness_step_pct: -10  
       - conditions:
           - condition: template
             value_template: '{{ trigger.to_state.state == "off_press" }}'
