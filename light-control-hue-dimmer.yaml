@@ -76,7 +76,7 @@ action:
           - choose:
               - conditions:
                   - condition: template
-                    value_template: "{{ schedule == false }}"
+                    value_template: "{{ schedule == 0 }}"
                 sequence:
                   - action: light.turn_on
                     data:
@@ -84,7 +84,7 @@ action:
                       brightness_pct: !input default_brightness
               - conditions:
                   - condition: template
-                    value_template: "{{ schedule == true }}"
+                    value_template: "{{ schedule == 1 }}"
                 sequence:
                   - choose:
                       - conditions:
