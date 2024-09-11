@@ -66,6 +66,7 @@ action:
           - service: light.turn_on
             data:
               entity_id: !input light_entity
+              brightness_pct: 100
 
       - conditions:
           - condition: state
