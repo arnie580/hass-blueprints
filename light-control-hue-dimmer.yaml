@@ -79,7 +79,7 @@ action:
                 sequence:
                   - choose:
                       - conditions:
-                          - condition: time # Daytime
+                          - condition: time
                              after: !input day_start
                              before: !input night_start
                         sequence:
@@ -87,7 +87,7 @@ action:
                             data:
                               entity_id: !input day_scene
                       - conditions:
-                          - condition: time # Nighttime
+                          - condition: time
                              after: !input night_start
                              before: !input day_start
                         sequence:
