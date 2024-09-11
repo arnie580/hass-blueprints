@@ -25,23 +25,27 @@ blueprint:
     day_scene:
       name: Day Scene
       description: The scene to enable during the day.
+      default: {}
       selector:
         entity:
           domain: scene
     day_start:
       name: Day Start
       description: The time the day scene should be activated.
+      default: {}
       selector:
         time:
     night_scene:
       name: Night Scene
       description: The scene to enable during at night.
+      default: {}
       selector:
         entity:
           domain: scene
     night_start:
       name: Night Start
       description: The time the night scene should be activated.
+      default: {}
       selector:
         time:
     default_brightness:
