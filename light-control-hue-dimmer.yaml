@@ -19,6 +19,7 @@ blueprint:
     light_schedule:
       name: Schedule
       description: Should different lights turn on depending on the time of day?
+      default: false
       selector:
         boolean:
     day_scene:
