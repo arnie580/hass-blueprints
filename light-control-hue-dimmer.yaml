@@ -16,6 +16,33 @@ blueprint:
       selector:
         entity:
           domain: light
+    light_schedule:
+      name: Schedule
+      decription: Should different lights turn on depending on the time of day?
+      selector:
+        boolean:
+    day_scene:
+      name: Day Scene
+      description: The scene to enable during the day.
+      selector:
+        entity:
+          domain: scene
+    day_start:
+      name: Day Start
+      description: The time the day scene should be activated.
+      selector:
+        time:
+    night_scene:
+      name: Night Scene
+      description: The scene to enable during at night.
+      selector:
+        entity:
+          domain: scene
+    night_start:
+      name: Night Start
+      description: The time the night scene should be activated.
+      selector:
+        time:
     default_brightness:
       name: Default Brightness
       description: The default brightness when the light is switched on.
@@ -25,7 +52,8 @@ blueprint:
           min: 1
           max: 100
           unit_of_measurement: percent
-
+variables:
+  schedule: !input light_schedule
 trigger:
   platform: state
   entity_id: !input hue_remote
@@ -36,13 +64,42 @@ action:
           - condition: template
             value_template: '{{ trigger.to_state.state == "on_press" }}'
         sequence:
-          - action: light.turn_on
-            data:
-              entity_id: !input light_entity
-              brightness_pct: !input default_brightness
+          - choose:
+              - conditions:
+                  - condition: template
+                    value_template: "{{ schedule == false }}"
+                sequence:
+                  - action: light.turn_on
+                    data:
+                      entity_id: !input light_entity
+                      brightness_pct: !input default_brightness
+              - conditions:
+                  - condition: template
+                    value_template: "{{ schedule == true }}"
+                sequence:
+                  - choose:
+                      - conditions:
+                          - condition: time # Daytime
+                             after: !input day_start
+                             before: !input night_start
+                        sequence:
+                          - action: scene.turn_on
+                            data:
+                              entity_id: !input day_scene
+                      - conditions:
+                          - condition: time # Nighttime
+                             after: !input night_start
+                             before: !input day_start
+                        sequence:
+                          - action: scene.turn_on
+                            data:
+                              entity_id: !input night_scene
       - conditions:
           - condition: template
             value_template: '{{ trigger.to_state.state == "up_press" }}'
+          - condition: state
+            entity_id: !input light_entity
+            state: "on"
         sequence:
           - action: light.turn_on
             data:
@@ -51,6 +108,9 @@ action:
       - conditions:
           - condition: template
             value_template: '{{ trigger.to_state.state == "down_press" }}'
+          - condition: state
+            entity_id: !input light_entity
+            state: "on"
         sequence:
           - action: light.turn_on
             data:
