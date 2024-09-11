@@ -25,7 +25,7 @@ blueprint:
     day_scene:
       name: Day Scene
       description: The scene to enable during the day.
-      default: {}
+      default: []
       selector:
         entity:
           domain: scene
@@ -38,7 +38,7 @@ blueprint:
     night_scene:
       name: Night Scene
       description: The scene to enable during at night.
-      default: {}
+      default: []
       selector:
         entity:
           domain: scene
