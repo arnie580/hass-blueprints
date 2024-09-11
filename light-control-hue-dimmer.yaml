@@ -16,6 +16,13 @@ blueprint:
       selector:
         entity:
           domain: light
+    dimmable_light:
+      name: Dimmable Entity
+      description: Not all lights are dimmable. This must be selected for dimming to work correctly.
+      default: []
+      selector:
+        entity:
+          domain: light
     light_schedule:
       name: Schedule
       description: Should different lights turn on depending on the time of day?
@@ -108,23 +115,23 @@ action:
           - condition: template
             value_template: '{{ trigger.to_state.state == "up_press" }}'
           - condition: state
-            entity_id: !input light_entity
+            entity_id: !input dimmable_light
             state: "on"
         sequence:
           - action: light.turn_on
             data:
-              entity_id: !input light_entity
+              entity_id: !input dimmable_light
               brightness_step: 25
       - conditions:
           - condition: template
             value_template: '{{ trigger.to_state.state == "down_press" }}'
           - condition: state
-            entity_id: !input light_entity
+            entity_id: !input dimmable_light
             state: "on"
         sequence:
           - action: light.turn_on
             data:
-              entity_id: !input light_entity
+              entity_id: !input dimmable_light
               brightness_step: -25  
       - conditions:
           - condition: template
