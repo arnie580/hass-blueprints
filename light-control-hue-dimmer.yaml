@@ -18,7 +18,7 @@ blueprint:
           domain: light
     light_schedule:
       name: Schedule
-      decription: Should different lights turn on depending on the time of day?
+      description: Should different lights turn on depending on the time of day?
       selector:
         boolean:
     day_scene:
