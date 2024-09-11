@@ -80,16 +80,16 @@ action:
                   - choose:
                       - conditions:
                           - condition: time
-                             after: !input day_start
-                             before: !input night_start
+                            after: !input day_start
+                            before: !input night_start
                         sequence:
                           - action: scene.turn_on
                             data:
                               entity_id: !input day_scene
                       - conditions:
                           - condition: time
-                             after: !input night_start
-                             before: !input day_start
+                            after: !input night_start
+                            before: !input day_start
                         sequence:
                           - action: scene.turn_on
                             data:
