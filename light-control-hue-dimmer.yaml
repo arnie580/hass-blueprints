@@ -32,7 +32,7 @@ blueprint:
     day_start:
       name: Day Start
       description: The time the day scene should be activated.
-      default: {}
+      default: "06:00:00"
       selector:
         time:
     night_scene:
@@ -45,7 +45,7 @@ blueprint:
     night_start:
       name: Night Start
       description: The time the night scene should be activated.
-      default: {}
+      default: "20:00:00"
       selector:
         time:
     default_brightness:
