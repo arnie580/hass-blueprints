@@ -67,7 +67,7 @@ action:
   - action: notify.mobile_app_chris_phone
     data:
       title: Test
-      message: '{{ trigger.to_state.state }}'
+      message: '{{ trigger.to_state.state + " " + schedule }}'
   - choose:
       - conditions:
           - condition: template
