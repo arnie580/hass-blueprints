@@ -70,6 +70,11 @@ variables:
 trigger:
   platform: state
   entity_id: !input hue_remote
+  to:
+    - "on_press"
+    - "up_press"
+    - "down_press"
+    - "off_press"
 
 action:
   - action: notify.mobile_app_chris_phone
