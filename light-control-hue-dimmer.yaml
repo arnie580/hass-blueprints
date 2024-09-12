@@ -77,10 +77,10 @@ trigger:
     - "off_press"
 
 action:
-  - action: notify.mobile_app_chris_phone
-    data:
-      title: Test
-      message: '{{ trigger.entity_id + " " + trigger.to_state.state + " " + (schedule | string) }}'
+ # - action: notify.mobile_app_chris_phone
+ #   data:
+  #    title: Test
+  #    message: '{{ trigger.entity_id + " " + trigger.to_state.state + " " + (schedule | string) }}'
   - choose:
       - conditions:
           - condition: template
