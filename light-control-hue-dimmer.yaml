@@ -64,7 +64,7 @@ blueprint:
           min: 1
           max: 100
           unit_of_measurement: percent
-mode: parallel
+mode: single
 variables:
   schedule: !input light_schedule
 trigger:
