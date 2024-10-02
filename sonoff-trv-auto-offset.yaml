@@ -9,6 +9,12 @@ blueprint:
         entity:
           filter:
             - domain: climate
+    offset_entity:
+      name: TRV Temp Offset Entity
+      selector:
+        entity:
+          filter:
+            - domain: number
     sensor_entity:
       name: External Temp Sensor
       selector:
@@ -25,7 +31,7 @@ variables:
   temp_entity: !input 'sensor_entity'
   sensor_temp: "{{ states(temp_entity) | round(1) }}"
   trv_temp: "{{ state_attr(trv_entity, 'current_temperature') | round(1) }}"
-  trv_offset: "{{ state_attr(trv_entity, 'local_temperature_calibration') | round(1) }}"
+  trv_offset: !input 'offset_entity'
   friendly_name: "{{ state_attr(trv_entity, 'friendly_name')}}"
   
 trigger:
