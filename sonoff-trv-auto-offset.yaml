@@ -32,7 +32,7 @@ variables:
   offset_entity: !input 'offset_entity'
   sensor_temp: "{{ states(temp_entity) | round(1) }}"
   trv_temp: "{{ state_attr(trv_entity, 'current_temperature') | round(1) }}"
-  trv_offset: "{{ state(offset_entity)|float}}"
+  trv_offset: "{{ states(offset_entity)|float}}"
   friendly_name: "{{ state_attr(trv_entity, 'friendly_name')}}"
   
 trigger:
