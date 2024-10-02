@@ -51,6 +51,6 @@ condition:
 action:
   - service: mqtt.publish
     data_template:
-      topic_template: "zigbee2mqtt/{{ friendly_name }}/set"
-      payload_template: '{"local_temperature_calibration":{{ (sensor_temp - (trv_temp - trv_offset)) | round(1) }}}'
+      topic: "zigbee2mqtt/{{ friendly_name }}/set"
+      payload: '{"local_temperature_calibration":{{ (sensor_temp - (trv_temp - trv_offset)) | round(1) }}}'
   - delay: 5
