@@ -24,7 +24,7 @@ variables:
   trv_entity: !input 'climate_entity'
   temp_entity: !input 'sensor_entity'
   sensor_temp: "{{ states(temp_entity) | round(1) }}"
-  trv_temp: "{{ state_attr(trv_entity, 'local_temperature') | round(1) }}"
+  trv_temp: "{{ state_attr(trv_entity, 'current_temperature') | round(1) }}"
   trv_offset: "{{ state_attr(trv_entity, 'local_temperature_calibration') | round(1) }}"
   friendly_name: "{{ state_attr(trv_entity, 'friendly_name')}}"
   
