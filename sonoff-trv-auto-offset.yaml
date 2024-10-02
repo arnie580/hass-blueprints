@@ -29,9 +29,10 @@ max_exceeded: silent
 variables:
   trv_entity: !input 'climate_entity'
   temp_entity: !input 'sensor_entity'
+  offset_entity: !input 'offset_entity'
   sensor_temp: "{{ states(temp_entity) | round(1) }}"
   trv_temp: "{{ state_attr(trv_entity, 'current_temperature') | round(1) }}"
-  trv_offset: !input 'offset_entity'
+  trv_offset: "{{ state(offset_entity)|float}}"
   friendly_name: "{{ state_attr(trv_entity, 'friendly_name')}}"
   
 trigger:
