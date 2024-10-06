@@ -51,8 +51,8 @@ condition:
 
 action:
    - action: number.set_value
+     entity_id: !input 'offset_entity'
      data:
-       entity_id: !input 'offset_entity'
        value: "{{ new_offset }}"
 #  - service: mqtt.publish
   #  data_template:
