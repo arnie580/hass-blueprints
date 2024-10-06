@@ -50,10 +50,10 @@ condition:
   value_template: "{{ sensor_temp != trv_temp }}"
 
 action:
-   - action: number.set_value
-     entity_id: !input 'offset_entity'
-     data:
-       value: "{{ new_offset }}"
+  - action: number.set_value
+    entity_id: !input 'offset_entity'
+    data:
+      value: "{{ new_offset }}"
 #  - service: mqtt.publish
   #  data_template:
   #    topic: "zigbee2mqtt/{{ friendly_name }}/set"
