@@ -42,7 +42,21 @@ blueprint:
         number:
           min: 0
           max: 100
-      
+
+    disable_on:
+      name: Disable On Action
+      description: If enabled, the light will not turn on when the activation sensor is triggered. 
+      default: false
+      selector:
+        boolean:
+
+    disable_on:
+      name: Disable On Action
+      description: If enabled, the light will remain on until manually switched off. 
+      default: false
+      selector:
+        boolean:
+
 trigger:
   - platform: state
     entity_id: !input activation_entity
@@ -62,6 +76,9 @@ action:
           - condition: numeric_state
             entity_id: !input brightness_entity
             below: !input brightness_threshold
+          - condition: state
+            entity_id: !input disable_on
+            state: false
         sequence:
           - service: light.turn_on
             data:
@@ -72,6 +89,9 @@ action:
           - condition: state
             entity_id: !input activation_entity
             state: "off"
+          - condition: state
+            entity_id: !input disable_off
+            state: false
         sequence:
           - service: light.turn_off
             data:
