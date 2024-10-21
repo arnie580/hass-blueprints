@@ -50,8 +50,8 @@ blueprint:
       selector:
         boolean:
 
-    disable_on:
-      name: Disable On Action
+    disable_off:
+      name: Disable Off Action
       description: If enabled, the light will remain on until manually switched off. 
       default: false
       selector:
