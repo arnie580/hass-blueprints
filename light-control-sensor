@@ -67,6 +67,10 @@ trigger:
     for:
       minutes: !input minutes_on
 
+variables:
+  disable_on: !input disable_on
+  disable_off: !input disable_off
+
 action:
   - choose:
       - conditions:
@@ -76,9 +80,8 @@ action:
           - condition: numeric_state
             entity_id: !input brightness_entity
             below: !input brightness_threshold
-          - condition: state
-            entity_id: !input disable_on
-            state: "off"
+          - condition: template
+            value_template: "{{ disable_on == 'off' }}"
         sequence:
           - service: light.turn_on
             data:
@@ -89,9 +92,8 @@ action:
           - condition: state
             entity_id: !input activation_entity
             state: "off"
-          - condition: state
-            entity_id: !input disable_off
-            state: "off"
+          - condition: template
+            value_template: "{{ disable_off == 'off' }}"
         sequence:
           - service: light.turn_off
             data:
