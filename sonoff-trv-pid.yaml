@@ -32,21 +32,21 @@ triggers:
   entity_id: !input 'thermostat_value'
 
 actions:
-  action: number.set_value
-  data: 
-    value: "{{100.0-states(thermostat_value)| float}}" 
-  target: 
-    entity_id: !input 'max_valve_closing'
+  - action: number.set_value
+    data: 
+      value: "{{100.0-states(thermostat_value)| float}}" 
+    target: 
+      entity_id: !input 'max_valve_closing'
 
-  action: number.set_value
-  data: 
-    value: >-
+  - action: number.set_value
+    data: 
+      value: >-
          {% if (states(thermostat_value) | float + 5) < 100 %}
              {{states(thermostat_value)| float+5}} 
          {% else %}
              100
          {% endif %}
          
-  target:
-    entity_id: !input 'max_valve_opening'
+    target:
+      entity_id: !input 'max_valve_opening'
 mode: single
