@@ -25,7 +25,7 @@ blueprint:
             - domain: number
 
 variables:
-  thermostat_value:
-  max_valve_opening:
-  max_valve_closing:
+  thermostat_value: !input 'thermostat_value'
+  max_valve_opening: !input 'max_valve_opening'
+  max_valve_closing: ! input 'max_valve_closing'
   
