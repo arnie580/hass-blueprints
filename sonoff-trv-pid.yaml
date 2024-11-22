@@ -2,5 +2,25 @@ blueprint:
   name: Sonoff TRV PID
   description: Automation to enable PID control of Sonoff TRV in conjuction with Smart Thermostat PID (available from HACS)
   domain: automation
-  input: 
+  input:
+    thermostat_value:
+      name: Thermostat Value
+      selector: 
+        entity:
+          filter:
+            - domain: input_number
+  
+    max_valve_opening:
+      name: Max Valve Opening Position
+      selector: 
+        entity:
+          filter:
+            - domain: number
+      
+    max_valve_closing:
+      name: Max Valve Opening Position
+      selector: 
+        entity:
+          filter:
+            - domain: number
   
