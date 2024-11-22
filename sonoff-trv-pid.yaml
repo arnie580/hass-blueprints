@@ -29,3 +29,20 @@ variables:
   max_valve_opening: !input 'max_valve_opening'
   max_valve_closing: ! input 'max_valve_closing'
   
+triggers: 
+  trigger: state
+  entity_id: input_number.trv_valve_position 
+
+actions:
+  action: number.set_value
+  data: 
+    value: "{{100.0-states('input_number.trv_valve_position')| float}}" 
+  target: 
+    entity_id: number.trv_valve_closing_degree 
+
+  action: number.set_value
+  data: 
+    value: "{{states('input_ number.trv_valve_position')| float+5}}" 
+  target:
+    entity_id: number.trv_valve_opening_degree
+  mode: single
