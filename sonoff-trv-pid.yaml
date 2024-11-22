@@ -1,1 +1,6 @@
-
+blueprint:
+  name: Sonoff TRV PID
+  description: Automation to enable PID control of Sonoff TRV in conjuction with Smart Thermostat PID (available from HACS)
+  domain: automation
+  input: 
+  
