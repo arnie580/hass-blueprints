@@ -43,4 +43,4 @@ actions:
     value: "{{states(thermostat_value)| float+5}}" 
   target:
     entity_id: !input 'max_valve_opening'
-  mode: single
+mode: single
