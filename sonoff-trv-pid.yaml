@@ -29,18 +29,18 @@ variables:
   
 triggers: 
   trigger: state
-  entity_id: input_number.trv_valve_position 
+  entity_id: !input 'thermostat_value'
 
 actions:
   action: number.set_value
   data: 
-    value: "{{100.0-states('input_number.trv_valve_position')| float}}" 
+    value: "{{100.0-states(thermostat_value)| float}}" 
   target: 
-    entity_id: number.trv_valve_closing_degree 
+    entity_id: !input 'max_valve_closing'
 
   action: number.set_value
   data: 
-    value: "{{states('input_ number.trv_valve_position')| float+5}}" 
+    value: "{{states(thermostat_value)| float+5}}" 
   target:
-    entity_id: number.trv_valve_opening_degree
+    entity_id: !input 'max_valve_opening'
   mode: single
