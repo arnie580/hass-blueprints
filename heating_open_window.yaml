@@ -1,1 +1,5 @@
-
+blueprint:
+  name: Heating Open Window
+  description: Disable a climate entity when a door or window is opened and restore the previous state when closed.
+  domain: automation
+  input:
