@@ -3,3 +3,22 @@ blueprint:
   description: Disable a climate entity when a door or window is opened and restore the previous state when closed.
   domain: automation
   input:
+    climate_entity:
+      name: Climate Entity
+      description: The climate entity controlling the rooms temperature.
+      selector:
+        entity:
+          filter:
+            domain:
+              - climate
+    monitored_openings:
+      name: Windows and Door
+      description: The window and door sensors that should disable the climate entity when opened.
+      selector:
+        entity:
+          filter:
+            domain:
+              - binary_sensor
+            device_class:
+              - door
+              - window
