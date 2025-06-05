@@ -49,8 +49,8 @@ variables:
 trigger:
   - platform: state
     entity_id: !input 'sensor_entity'
-    for:
-      seconds: 15
+   # for:
+    #  seconds: 15
 
 #  - platform: time_pattern
  #   minutes: "/5"
@@ -63,7 +63,7 @@ action:
   - action: number.set_value
     data:
       entity_id: !input 'set_trv_value'
-      value: "{{ external_temp }}"
+      value: "{{ external_temp | round(1) }}"
   #    value: "{{ new_offset }}"
 #  - service: mqtt.publish
   #  data_template:
