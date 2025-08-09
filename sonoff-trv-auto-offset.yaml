@@ -3,24 +3,12 @@ blueprint:
   description: Automatically adjust the offset of the temperature sensor using an external sensor.
   domain: automation
   input:
-#    climate_entity:
-#      name: Sonoff TRV Entity
-#      selector:
-#        entity:
-#          filter:
-#            - domain: climate
-#    offset_entity:
-#      name: TRV Temp Offset Entity
-#      selector:
-#        entity:
-#          filter:
-#            - domain: number
-    set_trv_value:
-      name: Set External Temp Entity
+    climate_entity:
+      name: Sonoff TRV Entity
       selector:
         entity:
           filter:
-            - domain: number
+            - domain: climate
     sensor_entity:
       name: External Temp Sensor
       selector:
@@ -33,6 +21,9 @@ mode: single
 max_exceeded: silent
 
 variables:
+  climate_entity: !input 'climate_entity'
+  temp_input: "{{ climate_entity | replace('climate','number') + '_external_temperature_input' }}"
+  trv_sensor: "{{ climate_entity | replace('climate','select') + '_temperature_sensor_select' }}"
   external_temp_sensor: !input 'sensor_entity'
   external_temp: "{{ states(external_temp_sensor) | round(1) }}"
   
@@ -60,9 +51,14 @@ trigger:
 #  value_template: "{{ sensor_temp != trv_temp }}"
 
 action:
+  - action: select.select_option
+    target:
+      entity_id: "{{ trv_sensor }}"
+    data:
+      option: "external"
   - action: number.set_value
     data:
-      entity_id: !input 'set_trv_value'
+      entity_id: '{{ temp_input }}'
       value: "{{ external_temp | round(1) }}"
   #    value: "{{ new_offset }}"
 #  - service: mqtt.publish
