@@ -9,6 +9,7 @@ blueprint:
       selector:
         entity:
           domain: binary_sensor
+          multiple: true
     light_entity:
       name: Light
       description: The light to control.
