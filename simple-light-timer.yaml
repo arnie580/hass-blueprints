@@ -8,7 +8,6 @@ blueprint:
       description: The binary sensor that triggers the light.
       selector:
         entity:
-          multiple: true
           filter:
             - domain: binary_sensor
     light_entity:
@@ -16,7 +15,8 @@ blueprint:
       description: The light to control.
       selector:
         entity:
-          domain: light
+          filter:
+            - domain: light
     delay_time:
       name: Delay Time
       description: The amount of time the light stays on after being triggered.
