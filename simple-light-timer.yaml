@@ -14,6 +14,7 @@ blueprint:
       description: The light to control.
       selector:
         entity:
+          multiple: true
           domain: light
     delay_time:
       name: Delay Time
