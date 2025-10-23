@@ -8,7 +8,8 @@ blueprint:
       description: The binary sensor that triggers the light.
       selector:
         entity:
-          domain: binary_sensor
+          filter:
+            - domain: binary_sensor
     light_entity:
       name: Light
       description: The light to control.
