@@ -15,7 +15,7 @@ blueprint:
       selector:
         entity:
         #  multiple: true
-         domain: light
+          domain: light
     delay_time:
       name: Delay Time
       description: The amount of time the light stays on after being triggered.
