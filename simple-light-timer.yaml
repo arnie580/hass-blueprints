@@ -15,7 +15,6 @@ blueprint:
       description: The light to control.
       selector:
         entity:
-          multiple: true
           filter:
             domain: light
             
