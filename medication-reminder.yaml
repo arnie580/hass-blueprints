@@ -7,3 +7,4 @@ blueprint:
     medication_dose:
     medication_patient:
     medication_time:
+    notification_entity:
