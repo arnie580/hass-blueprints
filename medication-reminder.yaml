@@ -20,7 +20,8 @@ blueprint:
       selector:
         text:
           multiple: true
-          multiline: true          
+          multiline: true
+          type: time
     notification_entity:
       name: Notification Entity
       selector:
