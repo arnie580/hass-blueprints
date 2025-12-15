@@ -4,7 +4,21 @@ blueprint:
   domain: automation
   input:
     medication_name:
+      name: Medication
+      selector:
+        text:
     medication_dose:
+      name: Dose
+      selector:
+        text:
     medication_patient:
+      name: Patient
+      selector: text
     medication_time:
+      name: Time Due
+      selector:
+        text:
     notification_entity:
+      name: Notification Entity
+      selector:
+        target:
