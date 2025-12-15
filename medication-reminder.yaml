@@ -24,9 +24,7 @@ blueprint:
     notification_entity:
       name: Notification Entity
       selector:
-        target:
-          entity:
-            - domain: notify
+        action:
 
 
 variables:
