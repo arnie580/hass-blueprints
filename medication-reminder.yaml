@@ -1,1 +1,9 @@
-
+blueprint:
+  name: Medication Reminder
+  description: Automation that sends notifications at set times as a reminder to take medication. There are options to name the medication, person, and dosage. The notification will not be cleared until it is confirmed the dose has been taken.
+  domain: automation
+  input:
+    medication_name:
+    medication_dose:
+    medication_patient:
+    medication_time:
