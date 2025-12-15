@@ -25,7 +25,9 @@ blueprint:
     notification_entity:
       name: Notification Entity
       selector:
-        action:
+        device:
+          entity:
+            integration: mobile_app
 
 
 variables:
