@@ -45,7 +45,7 @@ actions:
       for_each:
         !input notification_entity
       sequence:
-        - action: "notify.mobile_app_{{repeat.item}}"
+        - action: "notify.mobile_app_{{device_name(repeat.item)|lower|replace(" ","_")}}"
           data:
             title: Medication Reminder
             message: "{{ medication_patient + ' is due to take ' + medication_name + ' (' + medication_dose + ')' }}"
