@@ -20,7 +20,6 @@ blueprint:
       selector:
         text:
           multiple: true
-          sticky: true
           multiline: true
           type: time
     notification_entity:
