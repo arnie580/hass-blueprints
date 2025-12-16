@@ -26,6 +26,7 @@ blueprint:
       name: Notification Entity
       selector:
         device:
+          multiple: true
           entity:
             integration: mobile_app
 
