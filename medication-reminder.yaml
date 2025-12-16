@@ -20,6 +20,7 @@ blueprint:
       selector:
         text:
           multiple: true
+          sticky: true
           multiline: true
           type: time
     notification_entity:
@@ -51,3 +52,4 @@ actions:
             message: "{{ medication_patient + ' is due to take ' + medication_name + ' (' + medication_dose + ') at ' + now() |as_timestamp| timestamp_custom('%H:%M') }}"
             data:
               tag: "{{ this.name }}"
+              persistent: true
