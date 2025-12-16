@@ -41,8 +41,10 @@ triggers:
     at: !input medication_time
 
 actions: 
-  - action: notify.send_message
+  - repeat:
+      for_each:
+        !input notification_entity
+  - action: "notify.mobile_app_{{repeat.item}}"
     data:
-      entity_id: !input notification_entity
       title: Medication Reminder
       message: "{{ medication_patient + ' is due to take ' + medication_name + ' (' + medication_dose + ')' }}"
