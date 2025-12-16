@@ -48,4 +48,4 @@ actions:
         - action: 'notify.mobile_app_{{device_name(repeat.item)|lower|replace(" ","_")}}'
           data:
             title: Medication Reminder
-            message: "{{ medication_patient + ' is due to take ' + medication_name + ' (' + medication_dose + ')' }}"
+            message: "{{ medication_patient + ' is due to take ' + medication_name + ' (' + medication_dose + ') at ' + now() |as_timestamp| timestamp_custom('%H:%M') }}"
