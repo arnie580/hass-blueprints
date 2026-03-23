@@ -46,7 +46,7 @@ action:
             state: 'below_horizon'
         sequence:
           - service: light.turn_on
-            data:
+            target:
               entity_id: !input light_entity
       - conditions:
           - condition: state
@@ -54,5 +54,5 @@ action:
             state: 'off'
         sequence:
           - service: light.turn_off
-            data:
+            target:
               entity_id: !input light_entity
