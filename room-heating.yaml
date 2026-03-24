@@ -96,6 +96,8 @@ triggers:
 
 actions:
   - choose:
+
+  
   ### Temperature Change ###
       - conditions:
           - condition: template
@@ -106,6 +108,8 @@ actions:
               entity_id: !input trv_temp_input
             data:
               value: "{{ states(external_temp) | float }}"
+
+              
   ### Schedule ###
       - conditions:
           - condition: template
@@ -135,5 +139,33 @@ actions:
                       entity_id: !input trv
                     data:
                       temperature: '{{ states(night_temp) | float }}'
+
+                      
   ### Open Window ###
+      - condtitions:
+          - condition: template
+            value_template: '{{ trigger.id == "openings" }'
+        sequence:
+          - choose:
+              - condtiions:
+                  - condition: state
+                    entity_id: !input openings
+                    state: 'on'
+                sequence:
+                  - action: climate.set_temperature
+                    target:
+                      entity_id: !input trv
+                    data:
+                      temperature: 7
+              - conditions:
+                  - condition: state
+                    entity_id: !input openings
+                    state: 'off'
+                sequence:
+                  - choose:
+                      - conditions:
+                          - condition:
+                    
+
+            
   ### Presence ###
