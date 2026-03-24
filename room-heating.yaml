@@ -1,7 +1,7 @@
 # Triggers:
 # Schedule @
 # Presence @
-# Windows/Doors
+# Windows/Doors @
 # Temp Change @
 
 # Inputs:
@@ -78,6 +78,8 @@ blueprint:
             domain: input_number
 variables:
   external_temp: !input external_temp
+  day_temp: !input day_temp
+  night_temp: !input night_temp
 triggers:
   - trigger: state
     entity_id: !input schedule
@@ -105,5 +107,33 @@ actions:
             data:
               value: "{{ states(external_temp) | float }}"
   ### Schedule ###
+      - conditions:
+          - condition: template
+            value_template: '{{ trigger.id == "schedule" }}'
+          - condition: state
+            entity_id: !input openings
+            state: 'off'
+        sequence:
+          - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: !input schedule
+                    state: 'on'
+                sequence:
+                  - action: climate.set_temperature
+                    target: 
+                      entity_id: !input trv
+                    data:
+                      temperature: '{{ states(day_temp) | float }}'
+              - conditions:
+                  - condition: state
+                    entity_id: !input schedule
+                    state: 'off'
+                sequence:
+                  - action: climate.set_temperature
+                    target: 
+                      entity_id: !input trv
+                    data:
+                      temperature: '{{ states(night_temp) | float }}'
   ### Open Window ###
   ### Presence ###
