@@ -48,6 +48,7 @@ blueprint:
         entity:
           filter:
             domain: sensor
+            device_class: temperature
     schedule:
       name: Heating Schedule
       selector:
@@ -59,11 +60,13 @@ blueprint:
       description: Multiple sensors must be added to a group
       selector:
         entity:
-          multiple: true
           filter:
             domain: 
               - binary_sensor
               - group
+            device_class:
+              - door
+              - window
     day_temp:
       name: Day Temperature
       selector:
@@ -71,7 +74,7 @@ blueprint:
           filter:
             domain: input_number
     night_temp:
-      name: Day Temperature
+      name: Night Temperature
       selector:
         entity:
           filter:
