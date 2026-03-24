@@ -1,16 +1,16 @@
 # Triggers:
-# Schedule
-# Presence
+# Schedule @
+# Presence @
 # Windows/Doors
-# Temp Change
+# Temp Change @
 
 # Inputs:
 # Schedule @
 # TRV @
 # TRV Temp Setting @
-# Night Temp
-# Day Temp
-# Windows/Doors
+# Night Temp @
+# Day Temp @ 
+# Windows/Doors @
 # Temp Sensor @
 
 # Actions:
@@ -73,4 +73,26 @@ blueprint:
         entity:
           filter:
             domain: number
+    presence:
+      name: Presence Detection
+      selector:
+        entity:
+          filter:
+            domain:
+              - group
+              - device_tracker
     
+triggers:
+  - trigger: state
+    entity_id: !input schedule
+
+  - trigger: state
+    entity_id: !input presence
+
+  - trigger:  numeric_state
+    entity_id: !input external_temp
+
+  - trigger: state
+    entity_id: !input openings
+
+actions:
