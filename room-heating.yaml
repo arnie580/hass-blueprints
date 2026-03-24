@@ -56,11 +56,14 @@ blueprint:
             domain: schedule
     openings:
       name: Window and Door Sensors
+      description: Multiple sensors must be added to a group
       selector:
         entity:
           multiple: true
           filter:
-            domain: binary_sensor
+            domain: 
+              - binary_sensor
+              - group
     day_temp:
       name: Day Temperature
       selector:
