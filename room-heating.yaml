@@ -108,8 +108,9 @@ actions:
             value_template: '{{ trigger.id == "temperature" }}'
         sequence:
           - action: number.set_value
-            data:
+            target:
               entity_id: !input trv_temp_input
+            data:
               value: "{{ states(external_temp) | float }}"
   ### Schedule ###
   ### Open Window ###
