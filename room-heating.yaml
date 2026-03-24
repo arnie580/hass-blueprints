@@ -92,7 +92,7 @@ triggers:
   - trigger: state
     entity_id: !input presence
     id: presence
-  - trigger:  numeric_state
+  - trigger:  state
     entity_id: !input external_temp
     id: temperature
   - trigger: state
