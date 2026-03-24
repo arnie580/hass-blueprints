@@ -88,14 +88,15 @@ blueprint:
 triggers:
   - trigger: state
     entity_id: !input schedule
-
+    id: schedule
   - trigger: state
     entity_id: !input presence
-
+    id: presence
   - trigger:  numeric_state
     entity_id: !input external_temp
-
+    id: temperature
   - trigger: state
     entity_id: !input openings
+    id: openings
 
 actions:
