@@ -64,9 +64,6 @@ blueprint:
             domain: 
               - binary_sensor
               - group
-            device_class:
-              - door
-              - window
     day_temp:
       name: Day Temperature
       selector:
@@ -112,7 +109,7 @@ actions:
       - action: number.set_value
         data:
           entity_id: !input trv_temp_input
-          value: !input external_temp
+          value: "{{ states(!input external_temp) | float }}"
   ### Schedule ###
   ### Open Window ###
   ### Presence ###
