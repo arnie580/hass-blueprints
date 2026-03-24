@@ -100,3 +100,8 @@ triggers:
     id: openings
 
 actions:
+  choose:
+  ### Temperature Change ###
+  ### Schedule ###
+  ### Open Window ###
+  ### Presence ###
