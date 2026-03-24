@@ -106,7 +106,7 @@ actions:
   choose:
   ### Temperature Change ###
     conditions:
-      - template:
+      - condition: template
         value_template: '{{ trigger.id == "temperature" }}'
     sequence:
       - action: number.set_value
