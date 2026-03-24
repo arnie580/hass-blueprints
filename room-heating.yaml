@@ -101,16 +101,16 @@ triggers:
     id: openings
 
 actions:
-  choose:
+  - choose:
   ### Temperature Change ###
-    conditions:
-      - condition: template
-        value_template: '{{ trigger.id == "temperature" }}'
-    sequence:
-      - action: number.set_value
-        data:
-          entity_id: !input trv_temp_input
-          value: "{{ states(external_temp) | float }}"
+      - conditions:
+          - condition: template
+            value_template: '{{ trigger.id == "temperature" }}'
+        sequence:
+          - action: number.set_value
+            data:
+              entity_id: !input trv_temp_input
+              value: "{{ states(external_temp) | float }}"
   ### Schedule ###
   ### Open Window ###
   ### Presence ###
