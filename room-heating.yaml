@@ -1,6 +1,5 @@
 # Triggers:
 # Schedule @
-# Presence @
 # Windows/Doors @
 # Temp Change @
 
@@ -17,8 +16,6 @@
 # Turn off when window opens
 # Turn on when window closes
 
-# Turn off when going out
-# Turn on when coming home
 
 # Day temp when schedule turns on
 # Night temp when schedule turns off
@@ -84,9 +81,6 @@ triggers:
   - trigger: state
     entity_id: !input schedule
     id: schedule
-  - trigger: state
-    entity_id: zone.home
-    id: presence
   - trigger:  state
     entity_id: !input external_temp
     id: temperature
@@ -183,6 +177,3 @@ actions:
                               entity_id: !input trv
                             data:
                               temperature: '{{ states(night_temp) | float }}'
-                    
-                    
-### Presence ###
