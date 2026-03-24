@@ -164,8 +164,25 @@ actions:
                 sequence:
                   - choose:
                       - conditions:
-                          - condition:
+                          - condition: state
+                            entity_id: !input schedule
+                            state: 'on'
+                        sequence:
+                          - action: climate.set_temperature
+                            target: 
+                              entity_id: !input trv
+                            data:
+                              temperature: '{{ states(day_temp) | float }}'
+                      - conditions:
+                          - condition: state
+                            entity_id: !input schedule
+                            state: 'off'
+                        sequence:
+                          - action: climate.set_temperature
+                            target: 
+                              entity_id: !input trv
+                            data:
+                              temperature: '{{ states(night_temp) | float }}'
                     
-
-            
-  ### Presence ###
+                    
+### Presence ###
