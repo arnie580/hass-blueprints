@@ -76,14 +76,6 @@ blueprint:
         entity:
           filter:
             domain: input_number
-    presence:
-      name: Presence Detection
-      selector:
-        entity:
-          filter:
-            domain:
-              - group
-              - device_tracker
 variables:
   external_temp: !input external_temp
 triggers:
@@ -91,7 +83,7 @@ triggers:
     entity_id: !input schedule
     id: schedule
   - trigger: state
-    entity_id: !input presence
+    entity_id: zone.home
     id: presence
   - trigger:  state
     entity_id: !input external_temp
