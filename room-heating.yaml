@@ -1,16 +1,17 @@
 # Triggers:
-# Schedulen
+# Schedule
 # Presence
 # Windows/Doors
 # Temp Change
 
 # Inputs:
-# Schedule
-# TRV
+# Schedule @
+# TRV @
+# TRV Temp Setting @
 # Night Temp
 # Day Temp
 # Windows/Doors
-# Temp Sensor
+# Temp Sensor @
 
 # Actions:
 # Turn off when window opens
@@ -23,3 +24,53 @@
 # Night temp when schedule turns off
 
 # Set the temperature when the sensor changes
+
+blueprint:
+  name: TRV Heating
+  description: Manages Sonoff smart thermostatic radiator valves on a room by room basis including presence, open window, schedules, and external temperature sensors.
+  domain: automation
+  input:
+    trv:
+      name: Thermostatic Valve
+      selector:
+        entity:
+          filter:
+            domain: climate
+    trv_temp_input:
+      name: TRV Temperature Input
+      selector:
+        entity:
+          filter:
+            domain: number
+    external_temp:
+      name: External Temperature Sensor
+      selector:
+        entity:
+          filter:
+            domain: number
+    schedule:
+      name: Heating Schedule
+      selector:
+        entity:
+          filter:
+            domain: schedule
+    openings:
+      name: Window and Door Sensors
+      selector:
+        entity:
+          multiple: true
+          filter:
+            domain: binary_sensor
+    day_temp:
+      name: Day Temperature
+      selector:
+        entity:
+          filter:
+            domain: number
+    night_temp:
+      name: Day Temperature
+      selector:
+        entity:
+          filter:
+            domain: number
+    
