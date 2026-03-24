@@ -84,7 +84,8 @@ blueprint:
             domain:
               - group
               - device_tracker
-    
+variables:
+  external_temp: !input external_temp
 triggers:
   - trigger: state
     entity_id: !input schedule
@@ -109,7 +110,7 @@ actions:
       - action: number.set_value
         data:
           entity_id: !input trv_temp_input
-          value: "{{ states(!input external_temp) | float }}"
+          value: "{{ states(external_temp) | float }}"
   ### Schedule ###
   ### Open Window ###
   ### Presence ###
