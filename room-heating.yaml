@@ -69,13 +69,13 @@ blueprint:
       selector:
         entity:
           filter:
-            domain: number
+            domain: input_number
     night_temp:
       name: Day Temperature
       selector:
         entity:
           filter:
-            domain: number
+            domain: input_number
     presence:
       name: Presence Detection
       selector:
