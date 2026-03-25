@@ -138,7 +138,7 @@ actions:
   ### Open Window ###
       - conditions:
           - condition: template
-            value_template: '{{ trigger.id == "openings" }}'
+            value_template: "{{ trigger.id == 'openings' }}"
         sequence:
           - choose:
               - conditions:
