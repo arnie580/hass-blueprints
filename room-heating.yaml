@@ -87,7 +87,8 @@ triggers:
   - trigger: state
     entity_id: !input openings
     id: openings
-
+    for:
+      seconds: 30
 actions:
   - choose:
 
