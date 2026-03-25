@@ -136,12 +136,12 @@ actions:
 
                       
   ### Open Window ###
-      - condtitions:
+      - conditions:
           - condition: template
             value_template: '{{ trigger.id == "openings" }'
         sequence:
           - choose:
-              - condtiions:
+              - condiions:
                   - condition: state
                     entity_id: !input openings
                     state: 'on'
