@@ -7,7 +7,7 @@ blueprint:
       selector:
         entity:
           filter:
-            integration: Frigate
+            integration: frigate
             domain: camera            
     notify:
       name: Notification Target
@@ -18,12 +18,14 @@ blueprint:
             domain: notify
     conditions:
       name: Notification Condition(s)
-        selector:
-          condition:
+      default: []
+      selector:
+        condition:
     mqtt:
       name: MQTT Path
       default: 'frigate/reviews'
       selector:
-        text:
+        text: 
+        
       
       
