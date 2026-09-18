@@ -26,6 +26,9 @@ blueprint:
       default: 'frigate/reviews'
       selector:
         text: 
-        
-      
+
+variables:
+  camera_entity: !input camera
+  camera_name: "{{ camera_entity | replace ('camera.', '')}}"
+  
       
