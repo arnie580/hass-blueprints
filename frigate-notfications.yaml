@@ -1,1 +1,22 @@
-
+blueprint:
+  name: Frigate Notifications
+  domain: automation
+  input:
+    camera:
+      name: Camera
+      selector:
+        entity:
+          filter:
+            integration: Frigate
+            domain: camera
+            
+    notify:
+      name: Notification Target
+      entity:
+        filter:
+          domain: notify
+    conditions:
+      name: Notification Condition(s)
+      selector:
+        condition:
+      
