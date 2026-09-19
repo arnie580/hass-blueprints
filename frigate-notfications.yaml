@@ -36,7 +36,7 @@ blueprint:
             - label: Alerts
               value: alerts
             - label: Detections
-              detections: detections
+              value: detections
 
 variables:
   camera_entity: !input camera
