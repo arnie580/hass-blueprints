@@ -74,7 +74,7 @@ actions:
         - choose:
             - conditions:
                 - condition: template
-                  value_template: "{{ permitted_severity != 'end' }}"
+                  value_template: "{{ update_type != 'end' }}"
               sequence:
                 - action: "notify.mobile_app_{{ repeat.item | replace ('notify.', '')}}"
                   data:
@@ -86,8 +86,10 @@ actions:
 
             - conditions:
                 - condition: template
-                  value_template: "{{ permitted_severity == 'end' }}"
+                  value_template: "{{ update_type == 'end' }}"
               sequence:
+                - delay:
+                    seconds: 5
                 - action: "notify.mobile_app_{{ repeat.item | replace ('notify.', '')}}"
                   data:
                     title: Frigate
