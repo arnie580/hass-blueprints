@@ -41,6 +41,7 @@ blueprint:
 variables:
   camera_entity: !input camera
   camera_name: "{{ camera_entity | replace ('camera.', '')}}"
+  mobile_devices: !input notify
       
 triggers:
   - trigger: mqtt
@@ -54,18 +55,19 @@ conditions:
 actions:
   - variables:
       review_id: "{{ trigger.payload_json.after.id }}"
-      update_type: "{{ trigger.payload_json.type }}"  
-  - action: notify.send_message
-    target: 
-      entity_id: !input notify
-    data:
-      title: Frigate
-      message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
-      data:
-        image: >
-             {% if update_type != 'end' %}
-                  https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif
-             {% else %}
-                  https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/thumbnail.jpg?format=android
-             {% endif %}     
-        tag: "{{ review_id }}"
+      update_type: "{{ trigger.payload_json.type }}"
+  - repeat:
+      for_each: "{{ mobile_devices }}"
+      sequence:
+        - action: "{{ repeat.item }}"
+          data:
+            title: Frigate
+            message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
+            data:
+              image: >
+                   {% if update_type != 'end' %}
+                        https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif
+                   {% else %}
+                        https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/thumbnail.jpg?format=android
+                   {% endif %}     
+              tag: "{{ review_id }}"
