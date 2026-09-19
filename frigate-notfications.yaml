@@ -97,5 +97,5 @@ actions:
                     title: Frigate
                     message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
                     data:
-                      image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif"
+                      image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/{{ camera_name }}/review_thumbnail.webp"
                       tag: "{{ review_id }}"
