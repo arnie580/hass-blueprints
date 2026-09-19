@@ -62,7 +62,7 @@ actions:
     value_template: >
            {% if permitted_severity == review_type %}
                true
-           {% elseif permitted_severity == 'all" %}
+           {% elif permitted_severity == 'all' %}
               true
            {% else %}
               false
