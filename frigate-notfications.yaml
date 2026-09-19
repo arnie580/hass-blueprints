@@ -41,8 +41,7 @@ conditions:
 
 actions:
   - action: notify.send_message
-    target:
-      entity_id: !input notify
+    entity_id: !input notify
     data:
       title: Frigate
       message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
