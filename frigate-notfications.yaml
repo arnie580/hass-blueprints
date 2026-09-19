@@ -70,7 +70,7 @@ actions:
   - repeat:
       for_each: "{{ mobile_devices }}"
       sequence:
-        - action: "{{ repeat.item }}"
+        - action: "notify.mobile_app_{{ repeat.item }}"
           data:
             title: Frigate
             message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
