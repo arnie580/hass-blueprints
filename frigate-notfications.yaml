@@ -12,10 +12,11 @@ blueprint:
     notify:
       name: Notification Target
       selector:
-        device:
+        entity:
           multiple: true
           filter:
             integration: mobile_app
+            domain: notify
     conditions:
       name: Notification Condition(s)
       default: []
@@ -68,17 +69,17 @@ actions:
               false
            {% endif %}
   - repeat:
-      for_each: "{{ mobile_devices }}"
-      sequence:
-        - action: "notify.mobile_app_{{ repeat.item }}"
+      - action: "notify.mobile_app_{{ repeat.item }}"
+        target:
+          entity_id: !input notify
+        data:
+          title: Frigate
+          message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
           data:
-            title: Frigate
-            message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
-            data:
-              image: >
+            image: >
                    {% if update_type != 'end' %}
                         https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif
                    {% else %}
                         https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/thumbnail.jpg?format=android
                    {% endif %}     
-              tag: "{{ review_id }}"
+            tag: "{{ review_id }}"
