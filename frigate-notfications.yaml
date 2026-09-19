@@ -59,7 +59,14 @@ actions:
       update_type: "{{ trigger.payload_json.type }}"
       review_type: "{{ trigger.payload_json.after.severity }}"
   - condition: template
-    value_template: 
+    value_template: >
+           {% if permitted_severity == review_type %}
+               true
+           {% elseif permitted_severity == 'all" %}
+              true
+           {% else %}
+              false
+           {% endif %}
   - repeat:
       for_each: "{{ mobile_devices }}"
       sequence:
