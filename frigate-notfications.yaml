@@ -71,9 +71,7 @@ actions:
   - repeat:
       for_each: "{{ mobile_devices }}"
       sequence:
-        - action: notify.notify
-          target:
-            entity_id: "{{ repeat.item }}"
+        - action: "notify.mobile_app_{{ repeat.item | replace ('notify.', '')}}"
           data:
             title: Frigate
             message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
