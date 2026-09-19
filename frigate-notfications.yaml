@@ -35,9 +35,9 @@ blueprint:
             - label: Alerts and Detections
               value: all
             - label: Alerts
-              value: alerts
+              value: alert
             - label: Detections
-              value: detections
+              value: detection
 
 mode: queued
 
