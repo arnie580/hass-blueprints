@@ -12,10 +12,10 @@ blueprint:
     notify:
       name: Notification Target
       selector:
-        entity:
+        device:
           multiple: true
           filter:
-            domain: notify
+            integration: mobile app
     conditions:
       name: Notification Condition(s)
       default: []
