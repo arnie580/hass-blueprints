@@ -30,7 +30,7 @@ blueprint:
 variables:
   camera_entity: !input camera
   camera_name: "{{ camera_entity | replace ('camera.', '')}}"
-  
+  review_id: "{{
       
 triggers:
   - trigger: mqtt
