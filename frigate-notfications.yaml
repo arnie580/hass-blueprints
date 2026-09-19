@@ -44,5 +44,7 @@ actions:
     entity_id: !input notify
     data:
       title: Frigate
+      payload: "{{ camera_name }}"
+      value_template: "{{ value_json.after.camera }}"
       message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
   
