@@ -43,11 +43,17 @@ conditions:
 actions:
   - variables:
       review_id: "{{ trigger.payload_json.after.id }}"
+      update_type: "{{ trigger.payload_json.type }}"  
   - action: notify.send_message
     entity_id: !input notify
     data:
       title: Frigate
       message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
       data:
-        image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/thumbnail.jpg?format=android"
+        image: >
+             {% if review_id != 'end' %}
+                  "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif"
+             {% else $}
+                  "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/thumbnail.jpg?format=android"
+             {% endif %}     
         tag: "{{ review_id }}"
