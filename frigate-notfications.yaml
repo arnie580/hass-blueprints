@@ -35,10 +35,11 @@ variables:
 triggers:
   - trigger: mqtt
     topic: !input mqtt
-    payload: "{{ camera_name }}"
-    value_template: "{{ value_json.after.camera }}"
 
 conditions:
+  - condition: template
+    value_template: "{{ trigger.payload_json.after.camera == camera_name }}"
+  - !input conditions
 
 actions:
   - action: notify.send_message
