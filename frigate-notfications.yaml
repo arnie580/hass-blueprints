@@ -30,7 +30,6 @@ blueprint:
 variables:
   camera_entity: !input camera
   camera_name: "{{ camera_entity | replace ('camera.', '')}}"
-  review_id: "{{
       
 triggers:
   - trigger: mqtt
@@ -42,9 +41,13 @@ conditions:
 
 
 actions:
+  - variables:
+      review_id: "{{ trigger.payload_json.after.id }}"
   - action: notify.send_message
     entity_id: !input notify
     data:
       title: Frigate
       message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
-  
+      data:
+        image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/thumbnail.jpg?format=android"
+        tag: "{{ review_id }}"
