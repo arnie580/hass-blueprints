@@ -84,7 +84,8 @@ actions:
                     title: Frigate
                     message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
                     data:
-                      image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/{{ camera_name }}/review_thumbnail.webp"
+                     # image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/{{ camera_name }}/review_thumbnail.webp"
+                      image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif"
                       tag: "{{ review_id }}"
                       when: "{{ trigger_time }}"
 
@@ -93,7 +94,7 @@ actions:
                   value_template: "{{ update_type == 'end' }}"
               sequence:
                 - delay:
-                    seconds: 5
+                    seconds: 15
                 - action: "notify.mobile_app_{{ repeat.item | replace ('notify.', '')}}"
                   data:
                     title: Frigate
