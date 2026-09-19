@@ -71,15 +71,27 @@ actions:
   - repeat:
       for_each: "{{ mobile_devices }}"
       sequence:
-        - action: "notify.mobile_app_{{ repeat.item | replace ('notify.', '')}}"
-          data:
-            title: Frigate
-            message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
-            data:
-              image: >
-                   {% if update_type != 'end' %}
-                        https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif
-                   {% else %}
-                        https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/thumbnail.jpg?format=android
-                   {% endif %}     
-              tag: "{{ review_id }}"
+        - choose:
+            - conditions:
+                - condition: template
+                  value_template: "{{ permitted_severity != 'end' }}"
+              sequence:
+                - action: "notify.mobile_app_{{ repeat.item | replace ('notify.', '')}}"
+                  data:
+                    title: Frigate
+                    message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
+                    data:
+                      image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/thumbnail.jpg?format=android"
+                      tag: "{{ review_id }}"
+
+            - conditions:
+                - condition: template
+                  value_template: "{{ permitted_severity == 'end' }}"
+              sequence:
+                - action: "notify.mobile_app_{{ repeat.item | replace ('notify.', '')}}"
+                  data:
+                    title: Frigate
+                    message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
+                    data:
+                      image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif"
+                      tag: "{{ review_id }}"
