@@ -32,3 +32,18 @@ variables:
   camera_name: "{{ camera_entity | replace ('camera.', '')}}"
   
       
+triggers:
+  - trigger: mqtt
+    topic: !input mqtt
+    value_template: "{{ value_json.after.camera == camera_name }}"
+
+conditions:
+
+actions:
+  - action: notify.send_message
+    target:
+      entity: !input notify
+    data:
+      title: Frigate
+      message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
+  
