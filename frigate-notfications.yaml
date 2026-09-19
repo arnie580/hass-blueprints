@@ -53,7 +53,7 @@ actions:
         image: >
              {% if review_id != 'end' %}
                   "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif"
-             {% else $}
+             {% else %}
                   "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/thumbnail.jpg?format=android"
              {% endif %}     
         tag: "{{ review_id }}"
