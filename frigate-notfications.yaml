@@ -15,7 +15,7 @@ blueprint:
         device:
           multiple: true
           filter:
-            integration: mobile app
+            integration: mobile_app
     conditions:
       name: Notification Condition(s)
       default: []
