@@ -61,6 +61,7 @@ actions:
       review_id: "{{ trigger.payload_json.after.id }}"
       update_type: "{{ trigger.payload_json.type }}"
       review_type: "{{ trigger.payload_json.after.severity }}"
+      trigger_time: '{{trigger.payload_json["after"]["start_time"]|int}}'
   - condition: template
     value_template: >
            {% if permitted_severity == review_type %}
@@ -85,6 +86,7 @@ actions:
                     data:
                       image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/{{ camera_name }}/review_thumbnail.webp"
                       tag: "{{ review_id }}"
+                      when: "{{ trigger_time }}"
 
             - conditions:
                 - condition: template
@@ -99,3 +101,4 @@ actions:
                     data:
                       image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif"
                       tag: "{{ review_id }}"
+                      when: "{{ trigger_time }}"
