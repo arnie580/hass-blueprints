@@ -32,9 +32,12 @@ blueprint:
       selector:
         select:
           options:
-            'All'
-            'Alerts'
-            'Detections'
+            - label: Alerts and Detections
+              value: all
+            - label: Alerts
+              value: alerts
+            - label: Detections
+              detections: detections
 
 variables:
   camera_entity: !input camera
