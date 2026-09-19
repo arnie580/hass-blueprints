@@ -39,6 +39,8 @@ blueprint:
             - label: Detections
               value: detections
 
+mode: queued
+
 variables:
   camera_entity: !input camera
   camera_name: "{{ camera_entity | replace ('camera.', '')}}"
