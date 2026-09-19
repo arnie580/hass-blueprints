@@ -39,7 +39,7 @@ triggers:
 conditions:
   - condition: template
     value_template: "{{ trigger.payload_json.after.camera == camera_name }}"
-  - !input conditions
+
 
 actions:
   - action: notify.send_message
