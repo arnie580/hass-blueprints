@@ -28,7 +28,6 @@ blueprint:
         text: 
     review_type:
       name: Review Type
-      default: 'Both'
       selector:
         select:
           options:
