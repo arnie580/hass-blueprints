@@ -45,7 +45,8 @@ actions:
       review_id: "{{ trigger.payload_json.after.id }}"
       update_type: "{{ trigger.payload_json.type }}"  
   - action: notify.mobile_app
-    target: !input notify
+    target: 
+      entity_id: !input notify
     data:
       title: Frigate
       message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
