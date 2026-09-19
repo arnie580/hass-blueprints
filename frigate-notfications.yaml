@@ -51,9 +51,9 @@ actions:
       message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
       data:
         image: >
-             {% if review_id != 'end' %}
-                  "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif"
+             {% if update_type != 'end' %}
+                  https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif
              {% else %}
-                  "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/thumbnail.jpg?format=android"
+                  https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/thumbnail.jpg?format=android
              {% endif %}     
         tag: "{{ review_id }}"
