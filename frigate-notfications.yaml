@@ -52,21 +52,24 @@ triggers:
   - trigger: mqtt
     topic: !input mqtt
 
+variables:
+  camera_entity: !input camera
+  camera_name: "{{ camera_entity | replace ('camera.', '')}}"
+  mobile_devices: !input notify
+  permitted_severity: !input review_type
+  camera_friendly: "{{ camera_name | replace ('_',' ')|title }}"
+  review_id: "{{ trigger.payload_json.after.id }}"
+  update_type: "{{ trigger.payload_json.type }}"
+  review_type: "{{ trigger.payload_json.after.severity }}"
+  trigger_time: '{{trigger.payload_json["after"]["start_time"]|int}}'
+  zones: '{{ trigger.payload_json.after.data.zones }}'
+  objects: '{{ trigger.payload_json.after.data.objects }}'
+      
 conditions:
   - condition: template
     value_template: "{{ trigger.payload_json.after.camera == camera_name }}"
   - condition: and
     conditions: !input conditions
-
-
-actions:
-  - variables:
-      review_id: "{{ trigger.payload_json.after.id }}"
-      update_type: "{{ trigger.payload_json.type }}"
-      review_type: "{{ trigger.payload_json.after.severity }}"
-      trigger_time: '{{trigger.payload_json["after"]["start_time"]|int}}'
-      zones: '{{ trigger.payload_json.after.data.zones }}'
-      objects: '{{ trigger.payload_json.after.data.objects }}'
   - condition: template
     value_template: >
            {% if permitted_severity == review_type %}
@@ -76,6 +79,8 @@ actions:
            {% else %}
               false
            {% endif %}
+
+actions:
   - repeat:
       for_each: "{{ mobile_devices }}"
       sequence:
