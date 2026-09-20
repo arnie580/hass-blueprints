@@ -65,6 +65,8 @@ actions:
       update_type: "{{ trigger.payload_json.type }}"
       review_type: "{{ trigger.payload_json.after.severity }}"
       trigger_time: '{{trigger.payload_json["after"]["start_time"]|int}}'
+      zones: '{{ trigger.payload_json.after.data.zones }}'
+      objects: '{{ trigger.payload_json.after.data.objects }}'
   - condition: template
     value_template: >
            {% if permitted_severity == review_type %}
