@@ -46,6 +46,7 @@ variables:
   camera_name: "{{ camera_entity | replace ('camera.', '')}}"
   mobile_devices: !input notify
   permitted_severity: !input review_type
+  camera_friendly: "{{ camera_name | replace ('_',' ')|title }}"
       
 triggers:
   - trigger: mqtt
@@ -98,7 +99,7 @@ actions:
                 - action: "notify.mobile_app_{{ repeat.item | replace ('notify.', '')}}"
                   data:
                     title: Frigate
-                    message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
+                    message: "{{ camera_friendly }} camera has been triggered."
                     data:
                       image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif"
                       tag: "{{ review_id }}"
