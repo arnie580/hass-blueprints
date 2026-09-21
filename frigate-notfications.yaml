@@ -59,11 +59,14 @@ variables:
   permitted_severity: !input review_type
   camera_friendly: "{{ camera_name | replace ('_',' ')|title }}"
   review_id: "{{ trigger.payload_json.after.id }}"
+  event_id: "{{ trigger.payload.after.data.detections[0] }}"
   update_type: "{{ trigger.payload_json.type }}"
   review_type: "{{ trigger.payload_json.after.severity }}"
   trigger_time: '{{trigger.payload_json["after"]["start_time"]|int}}'
   zones: '{{ trigger.payload_json.after.data.zones }}'
   objects: '{{ trigger.payload_json.after.data.objects }}'
+  message: 'A person has been detected on the {{camera_friendly}} camera.'
+  title: '{{ camera_friendly }}'
       
 conditions:
   - condition: template
@@ -91,11 +94,11 @@ actions:
               sequence:
                 - action: "notify.mobile_app_{{ repeat.item | replace ('notify.', '')}}"
                   data:
-                    title: Frigate
-                    message: "{{ 'Camera ' + camera_name + ' has been triggered.' }}"
+                    title: '{{ title }}'
+                    message: "{{ message }}"
                     data:
-                     # image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/{{ camera_name }}/review_thumbnail.webp"
-                      image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif"
+                      image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ event_id }}/snapshot.jpg"
+
                       tag: "{{ review_id }}"
                       when: "{{ trigger_time }}"
 
@@ -107,8 +110,8 @@ actions:
                     seconds: 15
                 - action: "notify.mobile_app_{{ repeat.item | replace ('notify.', '')}}"
                   data:
-                    title: Frigate
-                    message: "{{ camera_friendly }} camera has been triggered."
+                    title: "{{ title }}"
+                    message: "{{ message }}"
                     data:
                       image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif"
                       tag: "{{ review_id }}"
