@@ -53,7 +53,7 @@ variables:
   permitted_severity: !input review_type
   camera_friendly: "{{ camera_name | replace ('_',' ')|title }}"
   review_id: "{{ trigger.payload_json.after.id }}"
-  event_id: "{{ trigger.payload.after.data.detections[0] }}"
+  event_id: "{{ trigger.payload_json.after.data.detections[0] }}"
   update_type: "{{ trigger.payload_json.type }}"
   review_type: "{{ trigger.payload_json.after.severity }}"
   trigger_time: '{{trigger.payload_json["after"]["start_time"]|int}}'
