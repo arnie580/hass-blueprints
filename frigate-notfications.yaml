@@ -41,13 +41,7 @@ blueprint:
 
 mode: queued
 
-variables:
-  camera_entity: !input camera
-  camera_name: "{{ camera_entity | replace ('camera.', '')}}"
-  mobile_devices: !input notify
-  permitted_severity: !input review_type
-  camera_friendly: "{{ camera_name | replace ('_',' ')|title }}"
-      
+
 triggers:
   - trigger: mqtt
     topic: !input mqtt
