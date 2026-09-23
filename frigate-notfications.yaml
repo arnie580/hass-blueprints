@@ -102,6 +102,9 @@ actions:
                  
               tag: "{{ review_id }}"
               when: "{{ trigger_time }}"
+              ttl: 0
+              priority: high
+              alert_once: true
 
   
                       
