@@ -81,32 +81,16 @@ actions:
   - repeat:
       for_each: "{{ mobile_devices }}"
       sequence:
-        - choose:
-            - conditions:
-                - condition: template
-                  value_template: "{{ update_type != 'end' }}"
-              sequence:
-                - action: "notify.mobile_app_{{ repeat.item | replace ('notify.', '')}}"
-                  data:
-                    title: '{{ title }}'
-                    message: "{{ message }}"
-                    data:
-                      image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ event_id }}/snapshot.jpg"
+        - action: "notify.mobile_app_{{ repeat.item | replace ('notify.', '')}}"
+          data:
+            title: '{{ title }}'
+            message: "{{ message }}"
+            data:
+              image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ event_id }}/snapshot.jpg"
+              image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif"
+               
+              tag: "{{ review_id }}"
+              when: "{{ trigger_time }}"
 
-                      tag: "{{ review_id }}"
-                      when: "{{ trigger_time }}"
-
-            - conditions:
-                - condition: template
-                  value_template: "{{ update_type == 'end' }}"
-              sequence:
-                - delay:
-                    seconds: 15
-                - action: "notify.mobile_app_{{ repeat.item | replace ('notify.', '')}}"
-                  data:
-                    title: "{{ title }}"
-                    message: "{{ message }}"
-                    data:
-                      image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif"
-                      tag: "{{ review_id }}"
-                      when: "{{ trigger_time }}"
+  
+                      
