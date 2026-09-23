@@ -8,7 +8,16 @@ blueprint:
         entity:
           filter:
             integration: frigate
-            domain: camera            
+            domain: camera        
+    base_url:
+      name: Home Assistant Base URL
+      selector: 
+        text:
+    frigate:
+      name: Frigate URL
+      selector:
+        text:
+    
     notify:
       name: Notification Target
       selector:
@@ -47,6 +56,8 @@ triggers:
     topic: !input mqtt
 
 variables:
+  frigate: !input frigate
+  base_url: !input base_url
   camera_entity: !input camera
   camera_name: "{{ camera_entity | replace ('camera.', '')}}"
   mobile_devices: !input notify
@@ -61,6 +72,9 @@ variables:
   objects: '{{ trigger.payload_json.after.data.objects }}'
   message: 'A person has been detected on the {{camera_friendly}} camera.'
   title: '{{ camera_friendly }}'
+  snapshot: "https://{{ base_url }}/api/frigate/notifications/{{ event_id }}/snapshot.jpg"
+  preview: "https://{{ base_url }}/api/frigate/notifications/{{ review_id }}/review_preview.gif"
+  clip: "https://{{ base_url }}/api/frigate/notifications/{{ event_id }}/clip.mp4"
       
 conditions:
   - condition: template
@@ -95,9 +109,9 @@ actions:
               
               image: >
                  {% if update_type != 'end' %}
-                     https://hass.arnie580.co.uk/api/frigate/notifications/{{ event_id }}/snapshot.jpg
+                     {{ snapshot }}
                  {% else %}
-                     https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif
+                     {{ preview }}
                  {% endif %}
                  
               tag: "{{ review_id }}"
@@ -105,6 +119,16 @@ actions:
               ttl: 0
               priority: high
               alert_once: true
+              actions:
+                - name: "Snapshot"
+                  action: "URI"
+                  uri: "{{ snapshot }}"
+                - name: "Clip"
+                  action: "URI"
+                  uri: "{{ clip }}"
+                - name: "Frigate"
+                  action: "URI"
+                  uri: "{{ frigate }}"
 
   
                       
