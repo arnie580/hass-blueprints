@@ -86,9 +86,14 @@ actions:
             title: '{{ title }}'
             message: "{{ message }}"
             data:
-              image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ event_id }}/snapshot.jpg"
-              image: "https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif"
-               
+              
+              image: >
+                 {% if update_type != 'end' %}
+                     https://hass.arnie580.co.uk/api/frigate/notifications/{{ event_id }}/snapshot.jpg
+                 {% else %}
+                     https://hass.arnie580.co.uk/api/frigate/notifications/{{ review_id }}/review_preview.gif
+                 {% endif %}
+                 
               tag: "{{ review_id }}"
               when: "{{ trigger_time }}"
 
