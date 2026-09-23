@@ -78,6 +78,12 @@ conditions:
            {% endif %}
 
 actions:
+  - if:
+      - condition: template
+        value_template: "{{ update_type == 'end' }}"
+    then:
+      - delay:
+          seconds: 30
   - repeat:
       for_each: "{{ mobile_devices }}"
       sequence:
