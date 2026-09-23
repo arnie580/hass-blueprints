@@ -120,15 +120,15 @@ actions:
               priority: high
               alert_once: true
               actions:
-                - name: "Snapshot"
+                - title: "Snapshot"
                   action: "URI"
                   uri: "{{ snapshot }}"
-                - name: "Clip"
+                - title: "Clip"
                   action: "URI"
                   uri: "{{ clip }}"
-                - name: "Frigate"
+                - title: "Frigate"
                   action: "URI"
-                  uri: "{{ frigate }}"
+                  uri: "https://{{ frigate }}"
 
   
                       
