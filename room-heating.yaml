@@ -57,7 +57,9 @@ blueprint:
       selector:
         entity:
           filter:
-            domain: button
+            domain: 
+              - button
+              - input_button
     openings:
       name: Window and Door Sensors
       description: Multiple sensors must be added to a group
