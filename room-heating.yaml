@@ -119,7 +119,7 @@ actions:
   ### Schedule ###
       - conditions:
           - condition: template
-            value_template: '{{ trigger.id == "schedule" | trigger.id == "sync" }}'
+            value_template: '{{ trigger.id == "schedule" or trigger.id == "sync" }}'
           - condition: state
             entity_id: !input openings
             state: 'off'
