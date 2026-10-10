@@ -52,6 +52,12 @@ blueprint:
         entity:
           filter:
             domain: schedule
+    trv_sync:
+      name: TRV Sync Button
+      selector:
+        entity:
+          filter:
+            domain: button
     openings:
       name: Window and Door Sensors
       description: Multiple sensors must be added to a group
@@ -81,6 +87,9 @@ triggers:
   - trigger: state
     entity_id: !input schedule
     id: schedule
+  - trigger: state
+    entity_id: !input trv_sync
+    id: sync
   - trigger:  state
     entity_id: !input external_temp
     id: temperature
@@ -108,7 +117,7 @@ actions:
   ### Schedule ###
       - conditions:
           - condition: template
-            value_template: '{{ trigger.id == "schedule" }}'
+            value_template: '{{ trigger.id == "schedule" | trigger.id == "sync" }}'
           - condition: state
             entity_id: !input openings
             state: 'off'
