@@ -85,6 +85,8 @@ variables:
   external_temp: !input external_temp
   day_temp: !input day_temp
   night_temp: !input night_temp
+  trv: !input trv
+  room_name: "{{ trv | replace('climate.') | replace('_trv') }}"
 triggers:
   - trigger: state
     entity_id: !input schedule
@@ -109,6 +111,11 @@ actions:
           - condition: template
             value_template: '{{ trigger.id == "temperature" }}'
         sequence:
+          - action: select.select_option
+            target:
+              entity_id: "select.{{ room_name }}_trv_temperature_sensor_select"
+            data:
+              option: "external_3"
           - action: number.set_value
             target:
               entity_id: !input trv_temp_input
