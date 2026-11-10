@@ -210,7 +210,7 @@ actions:
                               temperature: '{{ states(night_temp) | float }}'
       - conditions:
           - condition: template
-            value_template: "{{ trigger.id = 'boost_end' }}"
+            value_template: "{{ trigger.id == 'boost_end' }}"
         sequence:    
           - action: climate.set_temperature
             target:
