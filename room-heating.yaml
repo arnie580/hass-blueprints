@@ -109,6 +109,10 @@ triggers:
     id: openings
     for:
       seconds: 30
+  - trigger: timer.finished
+    target:
+      entity_id: !input boost_timer
+    id: boost_end 
 actions:
   - choose:
 
