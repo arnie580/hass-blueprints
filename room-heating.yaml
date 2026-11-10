@@ -217,7 +217,7 @@ actions:
               entity_id: !input trv
             data:
               temperature: |-
-                 {% if states(schedule) == on %}
+                 {% if states(schedule) == 'on' %}
                     {{ states(day_temp)|float}}
                  {% else %}
                     {{ states(night_temp)|float }}
