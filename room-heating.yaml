@@ -81,6 +81,13 @@ blueprint:
         entity:
           filter:
             domain: input_number
+    boost_timer:
+      name: Boost Timer
+      selector:
+        entity:
+          filter:
+            domain: timer
+            
 variables:
   external_temp: !input external_temp
   day_temp: !input day_temp
