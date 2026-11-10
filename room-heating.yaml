@@ -207,3 +207,7 @@ actions:
                               entity_id: !input trv
                             data:
                               temperature: '{{ states(night_temp) | float }}'
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.id = 'boost_end' }}"
+        sequence:    
