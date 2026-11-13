@@ -124,9 +124,8 @@ actions:
             value_template: '{{ trigger.id == "temperature" }}'
         sequence:
           - if:
-              condition: state
-              entity_id: "select.{{ room_name }}_trv_temperature_sensor_select"
-              state: "internal"
+              condition: template
+              value_template: "{{ states('select.' +room_name+'_trv_temperature_sensor_select') == 'internal' }}"
             then:
               - action: select.select_option
                 target:
