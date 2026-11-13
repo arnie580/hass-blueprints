@@ -127,7 +127,7 @@ actions:
             target:
               entity_id: "select.{{ room_name }}_trv_temperature_sensor_select"
             data:
-              option: "external_3"
+              option: "external"
           - action: number.set_value
             target:
               entity_id: !input trv_temp_input
